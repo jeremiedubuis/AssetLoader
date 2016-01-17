@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <title> JS - assetLoader </title>
+  <style>
+
+    html, body {
+    	width: 100%;
+    	height: 100%;
+    	padding: 0;
+    	margin: 0;
+    }
+
+	div img, div video {
+		max-height: 150px;
+        display: inline-block;
+        opacity: 0;
+        transition: .5s opacity ease-in-out;
+	}
+
+    .loaded img, .loaded video {
+        opacity: 1;
+    }
+
+  </style>
+</head>
+
+<body>
+
+	<div>
+		<img src="img/1.jpg" alt="" />
+		<img src="img/2.jpg" alt="" />
+		<img src="img/3.jpg" alt="" />
+		<img src="img/4.jpg" alt="" />
+		<img src="img/5.jpg" alt="" />
+		<img src="img/6.jpg" alt="" />
+		 <video src="video/1.mp4" controls></video>
+ 		 <video src="video/2.mp4" controls></video>
+ 		 <video src="video/2.mp4" controls></video>
+	</div>
+
+	<script src="js/assetLoader.js"></script>
+
+	<script type="text/javascript">
+
+
+    var assetLoader = new AssetLoader();
+    window.onload = function() {
+
+        var images = document.getElementsByTagName('img');
+        var videos = document.getElementsByTagName('video');
+
+        var _urlsToLoad = [];
+        for (var i=0, j=images.length; i<j ; i ++) {
+                _urlsToLoad.push(images[i].src);
+        }
+
+        for (var i=0, j=videos.length; i<j ; i ++) {
+                _urlsToLoad.push(videos[i].src);
+        }
+
+        assetLoader.preload(_urlsToLoad, function() {
+            document.getElementsByTagName("div")[0].className = "loaded";
+            console.log(_urlsToLoad.join(',')+' loaded');
+        })
+
+    };
+    </script>
+
+</body>
+
+</html>

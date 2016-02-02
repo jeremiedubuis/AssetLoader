@@ -25,7 +25,7 @@ AssetLoader.prototype = {
 
         this.activeIndex = this.activeIndex === null ? 0 : this.activeIndex+1;
 
-        if (this.activeIndex < this.loadingList.length-1 ) {
+        if (this.activeIndex < this.loadingList.length) {
 
             if (this.isImage(this.loadingList[this.activeIndex]))
                 func = this.preloadImage;
@@ -43,6 +43,7 @@ AssetLoader.prototype = {
     },
 
     preloadImage: function( url ) {
+
         if  (this.loaded.indexOf(url) === -1 ) {
 
             var _img = new Image();
@@ -69,11 +70,11 @@ AssetLoader.prototype = {
 
     preloadVideo: function( url ) {
 
+        var _this = this;
         if  (this.loaded.indexOf(url) < 0 ) {
 
             var _video = document.createElement('video');
             var _src   = document.createElement('source');
-            var _this = this;
 
 
             _video.ondurationchange = function() {
